@@ -1,0 +1,184 @@
+create database sayed
+
+create table Employee(
+empid int primary key identity(1000,1),
+empname varchar(50),
+deptid int,
+phone varchar(10),
+dob varchar(8), 
+email varchar(max)
+foreign key (deptid) references department(deptid)
+)
+
+create table department(
+deptid int primary key identity(10,1),
+deptname varchar(max),
+deptHead varchar(max),
+)
+
+create table Customer(
+custid int primary key identity(1000,1),
+custname varchar(50) not null,
+phone varchar(10) unique,
+dob varchar(8) default 'dd/mm/yy',
+email varchar(max) check(email=upper(email))
+
+)
+
+create procedure getemployee
+as
+begin
+
+select *from employee
+
+end;
+
+
+create procedure oneemployee @empid int
+AS
+begin 
+
+select *from Employee where empid=@empid;
+
+end;
+
+exec oneemployee @empid=10;
+
+create procedure oneemployeexxx @empid int,@empname varchar(max)
+AS
+begin 
+
+select *from Employee where empid=@empid and empname=@empname;
+
+end 
+
+exec oneemployeexxx @empid=1005, @empname='sayed';
+
+
+insert into employee values('sayed',10,'93678912','1998','sayed11@gmail,com');
+
+insert into department values('IT','XYZ')
+
+-- ------------------------------------------------------------------------------------------------
+
+create table tempp
+(
+fir int,
+sec char(15)
+);
+
+create procedure abc
+as
+begin
+insert into tempp values(1,'CDAC')
+end; 
+
+exec abc;
+
+
+
+create procedure pqr
+as
+declare @x int, @y varchar(20) ;
+set @x=10 ;
+set @y='Aims';
+
+begin
+
+drop procedure pqr;
+insert into tempp values(@x,@y)
+
+end;
+exec pqr;
+
+select *from tempp;
+
+
+create procedure hra
+as
+declare @x char(15)='Sayed',@y float=3000,@z float = 0.4, @hra float;
+
+set @hra=@y*@z;
+begin
+
+insert into tempp values(@hra,@x)
+end;
+
+exec hra;
+
+drop procedure hra;
+-- ////////////////////////////////////////////////////////////////////PARAMETERIZED PROCEDURE
+
+
+create procedure hraArgs(@sal int,@name char(15))
+as
+declare @rate float=0.4 , @hra float;
+set @hra=@rate*@sal;
+
+begin
+
+insert into tempp values(@hra,@name)
+end;
+
+exec hraArgs @sal=1000,@name='sakib';
+
+select *from tempp;
+
+/* */ -- -- ////////////////////////////////////////////////////////////////////
+
+create table Employeesx(
+Empid int primary key identity(1,1),
+Ename varchar(max),
+Sal float,
+Designation varchar(30),
+DeptNo int
+)
+
+insert into Employeesx values('Scott',30000,'Clerk',10);
+insert into Employeesx values('Alina',60000,'Developer',15);
+insert into Employeesx values('Samar',50000,'Admin',15);
+
+-- -----------------------------------------------------------
+create procedure hraTbl
+as
+declare @ratee float=0.4 , @hraa float,@salary float,@ename char(15);
+
+begin
+set @ename='alina';
+select  @salary =sal from Employeesx where Ename=@ename; 
+set @hraa=@ratee*@salary;
+insert into tempp values(@hraa,@ename)
+end;
+
+exec hraTbl;
+
+--------------------------------------------------
+
+
+HOST: 169.48.136.12
+
+username: exotracdevshare
+
+password: ExotrAc123!
+
+select *from tempp;
+
+ @FileID bigint     ,             
+	@RTE varchar(50) ,
+	@Carrier varchar(100) ,
+	@ChecksheetScanpt varchar(200) ,
+	@YardDate varchar(50) ,
+	@YardTime varchar(50) ,
+	@ArrivalComment varchar(255) ,
+	@PUD varchar(50) ,
+	@PartsULDate varchar(50) ,
+	@PartsULCounter varchar(50) ,
+	@PartsULDoors varchar(50) ,
+	@PartsULStart varchar(50) ,
+	@PartsULEnd varchar(50) ,
+	@PartLoadDoor varchar(50) ,
+	@PartLoadDate varchar(50) ,
+	@PartLoadStart varchar(50) ,
+	@PartLoadEnd varchar(50)   ,
+	@UserCode varchar(50)
+
